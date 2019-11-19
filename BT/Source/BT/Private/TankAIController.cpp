@@ -2,6 +2,7 @@
 
 #include "TankAIController.h"
 #include "Engine/World.h"
+#define OUT
 
 void ATankAIController::BeginPlay()
 {
@@ -18,6 +19,19 @@ void ATankAIController::BeginPlay()
 	}
 }
 
+void ATankAIController::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	if (GetPlayerTank())
+	{
+		// TODO MKove towards player
+
+		AimTowardsPlayer();
+
+		// TODO Fire at player
+	}
+}
+
 ATank* ATankAIController::GetControlledTank() const
 {
 	return Cast<ATank>(GetPawn());
@@ -28,4 +42,12 @@ ATank* ATankAIController::GetPlayerTank() const
 	APlayerController* PlayerPC = GetWorld()->GetFirstPlayerController();
 
 	return Cast<ATank>(PlayerPC->GetPawn());
+}
+
+void ATankAIController::AimTowardsPlayer()
+{
+	if (!GetControlledTank()) { return; }
+
+	GetControlledTank()->AimAt(GetPlayerTank()->GetActorLocation());
+
 }
