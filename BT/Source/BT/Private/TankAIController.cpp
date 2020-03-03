@@ -22,7 +22,7 @@ void ATankAIController::Tick(float DeltaTime)
 		// Move towards player
 		MoveToActor(PlayerTank, AcceptanceRadius);
 
-		AITank->AimAt(PlayerTank->GetActorLocation());
+		/*AITank->AimAt(PlayerTank->GetActorLocation());*/
 
 		AITank->Fire(); // TODO limit firing rate 
 
